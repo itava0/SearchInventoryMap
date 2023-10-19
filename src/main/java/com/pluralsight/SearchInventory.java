@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class SearchInventory {
     public static void main(String[] args) throws IOException {
 
-        HashMap<Integer, Product> inventory = getInventory();
+        HashMap<String, Product> inventory = getInventory();
         BufferedReader readFile = new BufferedReader(new FileReader("src/main/resources/inventory.csv"));
         String input;
         int product_id;
@@ -21,7 +21,7 @@ public class SearchInventory {
             product_name = temp[1];
             product_price = Float.parseFloat(temp[2]);
             product_id = Integer.parseInt(temp[0]);
-            inventory.put(product_id, new Product(product_id, product_name, product_price));
+            inventory.put(product_name, new Product(product_id, product_name, product_price));
         }
         readFile.close();
 
@@ -32,8 +32,8 @@ public class SearchInventory {
                     p.getId(), p.getName(), p.getPrice());
         }
     }
-    public static HashMap<Integer, Product> getInventory() {
-        HashMap<Integer, Product> inventory = new HashMap<>();
+    public static HashMap<String, Product> getInventory() {
+        HashMap<String, Product> inventory = new HashMap<>();
 
         return inventory;
     }
