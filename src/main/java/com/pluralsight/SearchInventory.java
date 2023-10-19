@@ -31,6 +31,26 @@ public class SearchInventory {
             System.out.printf("id: %d %s - Price: $%.2f\n",
                     p.getId(), p.getName(), p.getPrice());
         }
+        while(true) {
+            System.out.print("What item are you interested in? ");
+            String name = scanner.nextLine().trim();
+            Product matchedProduct = inventory.get(name);
+            if (matchedProduct == null) {
+                System.out.println("We don't carry that product");
+                return;
+            }
+            System.out.printf("We carry %s and the price is $%.2f\n",
+                    matchedProduct.getName(), matchedProduct.getPrice());
+
+            System.out.println("Do you want to search again");
+            String searchAgain = scanner.nextLine().trim();
+
+            if ("no".equalsIgnoreCase(searchAgain)) {
+                break;
+            }
+        }
+
+        scanner.close();
     }
     public static HashMap<String, Product> getInventory() {
         HashMap<String, Product> inventory = new HashMap<>();
