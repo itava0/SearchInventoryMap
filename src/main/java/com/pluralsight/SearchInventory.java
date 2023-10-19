@@ -21,7 +21,8 @@ public class SearchInventory {
             product_name = temp[1];
             product_price = Float.parseFloat(temp[2]);
             product_id = Integer.parseInt(temp[0]);
-            inventory.put(product_name, new Product(product_id, product_name, product_price));
+            String newProuctName = product_name.replaceAll("[^a-zA-Z0-9]", "");
+            inventory.put(newProuctName.toLowerCase(), new Product(product_id, product_name, product_price));
         }
         readFile.close();
 
@@ -31,10 +32,15 @@ public class SearchInventory {
             System.out.printf("id: %d %s - Price: $%.2f\n",
                     p.getId(), p.getName(), p.getPrice());
         }
+
+        for (String key : inventory.keySet()) {
+            System.out.println(key);
+        }
         while(true) {
             System.out.print("What item are you interested in? ");
-            String name = scanner.nextLine().trim();
+            String name = scanner.nextLine().trim().toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
             Product matchedProduct = inventory.get(name);
+            System.out.println(matchedProduct);
             if (matchedProduct == null) {
                 System.out.println("We don't carry that product");
                 return;
